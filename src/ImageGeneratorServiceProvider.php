@@ -2,9 +2,9 @@
 
 namespace FreshbitsWeb\ImageGenerator;
 
+use FreshbitsWeb\ImageGenerator\Commands\ImageGeneratorCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use FreshbitsWeb\ImageGenerator\Commands\ImageGeneratorCommand;
 
 class ImageGeneratorServiceProvider extends PackageServiceProvider
 {

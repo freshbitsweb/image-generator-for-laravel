@@ -2,9 +2,9 @@
 
 namespace FreshbitsWeb\ImageGenerator\Tests;
 
+use FreshbitsWeb\ImageGenerator\ImageGeneratorServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use FreshbitsWeb\ImageGenerator\ImageGeneratorServiceProvider;
 
 class TestCase extends Orchestra
 {
