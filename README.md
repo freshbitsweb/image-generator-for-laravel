@@ -35,7 +35,19 @@ php artisan vendor:publish --tag="image-generator-for-laravel-config"
 
 ## Usage
 
-// TODO:
+### Generate an image
+To generate an image, run the following command:
+```bash
+php artisan generate:image
+```
+This will prompt you to input the name, height, and width of the image you want to generate.
+
+### Generate an image with a specific message
+To generate an image with a specific message, run the following command:
+
+```bash
+php artisan generate:image 'Hello World!!'
+```
 
 ## Testing
 

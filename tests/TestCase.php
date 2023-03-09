@@ -12,6 +12,8 @@ class TestCase extends Orchestra
     {
         parent::setUp();
 
+        $this->app->useStoragePath(__DIR__.'/storage');
+
         Factory::guessFactoryNamesUsing(
             fn (string $modelName) => 'FreshbitsWeb\\ImageGenerator\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
