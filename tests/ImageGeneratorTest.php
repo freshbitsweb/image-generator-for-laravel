@@ -2,13 +2,15 @@
 
 use Illuminate\Support\Facades\Storage;
 
-it('can generate the image', function () {
+beforeEach(function () {
     Storage::delete('public/Test.png');
+});
 
+it('can generate the image', function () {
     expect(Storage::fileExists('public/Test.png'))
         ->toBeFalse();
 
-    $this->artisan('generate:image Test 300 100')
+    $this->artisan('generate:image --name=Test --width=300 --height=100')
         ->assertExitCode(0);
 
     expect(Storage::fileExists('public/Test.png'))
