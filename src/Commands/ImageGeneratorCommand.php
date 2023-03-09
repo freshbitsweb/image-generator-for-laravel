@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ImageGeneratorCommand extends Command
 {
-    public $signature = 'generate:images {name?} {width?} {height?}';
+    public $signature = 'generate:image {name?} {width?} {height?}';
 
     public $description = 'This command lets you generate images.';
 
