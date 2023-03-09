@@ -50,7 +50,7 @@ class ImageGeneratorCommand extends Command
         $image = @imagecreate($width, $height);
 
         // White background
-        $bgColor = @imagecolorallocate($image, 255, 255, 255);
+        @imagecolorallocate($image, 255, 255, 255);
 
         // Black text
         $textColor = @imagecolorallocate($image, 0, 0, 0);

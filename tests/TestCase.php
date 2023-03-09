@@ -3,7 +3,6 @@
 namespace FreshbitsWeb\ImageGenerator\Tests;
 
 use FreshbitsWeb\ImageGenerator\ImageGeneratorServiceProvider;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
@@ -13,10 +12,6 @@ class TestCase extends Orchestra
         parent::setUp();
 
         $this->app->useStoragePath(__DIR__.'/storage');
-
-        Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'FreshbitsWeb\\ImageGenerator\\Database\\Factories\\'.class_basename($modelName).'Factory'
-        );
     }
 
     protected function getPackageProviders($app)

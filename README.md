@@ -7,17 +7,7 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/freshbitsweb/image-generator-for-laravel/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/freshbitsweb/image-generator-for-laravel/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/freshbitsweb/image-generator-for-laravel.svg?style=flat-square)](https://packagist.org/packages/freshbitsweb/image-generator-for-laravel)
 
-Generate images in your Laravel projects.
-
-<p>
-    We are excited to announce a new feature that will allow you to generate custom images with your chosen text. With this feature, you can add a personal touch to your visual content by including your name or any text you desire.
-</p>
-
-Our image generation technology is state-of-the-art, producing high-quality, visually stunning images that are sure to impress. Our team has put a lot of effort into perfecting this feature to ensure that the images generated are super duper cool as per your requirements.
-
-To use this feature, simply provide us with the text you want to include in the image, and our system will do the rest. You can customize the font, color, and style of the text to ensure that it fits your needs perfectly.
-
-We're excited to offer this new feature and can't wait for you to try it out. If you have any questions or feedback, please don't hesitate to [let us know](mailto:info@freshbits.in).
+This package allows you to generate images using a command in your Laravel web apps.
 
 ## Installation
 
