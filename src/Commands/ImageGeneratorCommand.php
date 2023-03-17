@@ -4,22 +4,25 @@ namespace FreshbitsWeb\ImageGenerator\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Browsershot\Browsershot;
 
 class ImageGeneratorCommand extends Command
 {
-    public $signature = 'generate:image {--name=} {--width=} {--height=}';
+    public $signature = 'generate:image {--name=} {--width=} {--height=} {--bgColor=} {--textColor=}';
 
     public $description = 'This command lets you generate images.';
 
     public function handle(): int
     {
-        [$name, $width, $height] = $this->promptForImageDetails();
+        [$name, $width, $height, $bgColor, $textColor] = $this->promptForImageDetails();
 
         if ($this->validateTheArgument($name, $width, $height)) {
             return static::INVALID;
         }
 
-        $this->generateImage($name, $width, $height);
+        $html = $this->renderView($name, $bgColor, $textColor);
+
+        $this->generateImage($name, $width, $height, $html);
 
         $this->successMessage($name);
 
@@ -31,8 +34,10 @@ class ImageGeneratorCommand extends Command
         $name = $this->option('name') ?: $this->ask('What is the name of the image?', 'Hello world!!');
         $width = (int) $this->option('width') ?: (int) $this->ask('What is the width of the image?', config('image-generator.width'));
         $height = (int) $this->option('height') ?: (int) $this->ask('What is the height of the image?', config('image-generator.height'));
+        $bgColor = $this->option('bgColor') ?: $this->ask('What is the background color of the image?', config('image-generator.background_color'));
+        $textColor = $this->option('textColor') ?: $this->ask('What is the text color of the image?', config('image-generator.text_color'));
 
-        return [$name, $width, $height];
+        return [$name, $width, $height, $bgColor, $textColor];
     }
 
     private function validateTheArgument(string $name, int $width, int $height): bool
@@ -62,29 +67,11 @@ class ImageGeneratorCommand extends Command
         return false;
     }
 
-    private function generateImage(string $name, int $width, int $height): void
+    private function generateImage(string $name, int $width, int $height, string $html): void
     {
-        // Step 1: Open the file with write permissions
-        $file = @fopen(Storage::path("public/$name.png"), 'w');
-
-        $image = @imagecreate($width, $height);
-
-        // White background
-        @imagecolorallocate($image, 255, 255, 255);
-
-        // Black text
-        $textColor = @imagecolorallocate($image, 0, 0, 0);
-
-        @imagestring($image, 5, 10, 10, $name, $textColor);
-
-        // Step 3: Write the image to the file
-        @imagepng($image, $file);
-
-        // Step 4: Close the file
-        @fclose($file);
-
-        // Step 6: Free up memory by destroying the image resource
-        @imagedestroy($image);
+        Browsershot::html($html)
+            ->windowSize($width, $height)
+            ->save(Storage::path("public/$name.png"));
     }
 
     private function successMessage(string $name)
@@ -94,5 +81,14 @@ class ImageGeneratorCommand extends Command
         $this->info('╰───────────────────────────────────────────╯');
         $this->newLine();
         $this->line('<options=bold;fg=green>IMAGE PATH:</> '.Storage::path("public/$name.png"));
+    }
+
+    private function renderView(string $name, string $bgColor, string $textColor)
+    {
+        return view('image-generator-for-laravel::theme', [
+            'name' => $name,
+            'backgroundColor' => $bgColor,
+            'textColor' => $textColor,
+        ])->render();
     }
 }
