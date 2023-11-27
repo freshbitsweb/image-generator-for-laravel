@@ -18,6 +18,7 @@ class ImageGeneratorServiceProvider extends PackageServiceProvider
         $package
             ->name('image-generator-for-laravel')
             ->hasConfigFile('image-generator')
+            ->hasViews()
             ->hasCommand(ImageGeneratorCommand::class);
     }
 }
